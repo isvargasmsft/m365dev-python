@@ -14,8 +14,10 @@ pip install msgraph-sdk
 > Note: Enable long paths in your environment if you receive a `Could not install packages due to an OSError`. For details, see [Enable Long Paths in Windows 10, Version 1607, and Later](https://learn.microsoft.com/en-us/windows/win32/fileio/maximum-file-path-limitation?tabs=powershell#enable-long-paths-in-windows-10-version-1607-and-later).
 
 ## Install the Semantic Kernel 
-
-Placeholder. Explore the [Semantic Kernel](https://github.com/microsoft/semantic-kernel).
+```PyPI
+pip install semantic-kernel
+```
+Explore the [Semantic Kernel repo](https://github.com/microsoft/semantic-kernel) and the [Getting started](https://learn.microsoft.com/en-us/semantic-kernel/get-started/quick-start-guide/?toc=%2Fsemantic-kernel%2Ftoc.json&tabs=python) documentation.
 
 ## Set up authentication and initialize the Microsoft Graph Python SDK
 The first piece of this application is initializing the Microsoft Graph service. 
