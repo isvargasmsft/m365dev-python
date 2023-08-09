@@ -107,7 +107,7 @@ async def create_todo_list():
     try:
         request_body = TodoTaskList()
         request_body.display_name = 'Action items from emails'
-        result = await client.users_by_id("AlexW@M365x86781558.OnMicrosoft.com").todo.lists.post(request_body)
+        result = await client.users_by_id("AlexW@contoso.com").todo.lists.post(request_body)
     except Exception as e_rr:
         print(f'Error: {e_rr.error.message}')
 
