@@ -115,3 +115,27 @@ async def create_todo_list():
 
 asyncio.run(create_todo_list())
 ```
+## Add tasks to the list
+We'll add the action items extracted from the emails as tasks in the new ToDo list. 
+```py
+# Create new tasks
+from msgraph.generated.models.todo_task import TodoTask
+async def create_new_task(item):
+    """Create a new task"""
+    try:
+        request_body = TodoTask()
+        request_body.title = item
+        result = await client.users_by_id("AlexW@M365x86781558.OnMicrosoft.com").todo.lists_by_id(my_list_id).tasks.post(request_body)
+    except Exception as e_rr:
+        print(f'Error: {e_rr.error.message}')
+
+# placeholder action items
+my_action_items = [
+    "Create email", 
+    "Review presentation",
+    "Schedule meeting"
+]
+
+for item in my_action_items:
+    asyncio.run(create_new_task(item))
+```
