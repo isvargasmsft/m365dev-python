@@ -92,3 +92,24 @@ client = GraphServiceClient(request_adapter)
          print(f'Error: {e_rr.error.message}')
  asyncio.run(get_user_messages())
 ```
+
+## Extract action items from emails
+Placeholder.
+
+## Create a new ToDo list
+With the action items ready, we can create a new ToDo list to add our tasks.
+```py
+# Create ToDo list
+from msgraph.generated.models.todo_task_list import TodoTaskList
+
+async def create_todo_list():
+    """Create a ToDo list"""
+    try:
+        request_body = TodoTaskList()
+        request_body.display_name = 'Action items from emails'
+        result = await client.users_by_id("AlexW@M365x86781558.OnMicrosoft.com").todo.lists.post(request_body)
+    except Exception as e_rr:
+        print(f'Error: {e_rr.error.message}')
+
+asyncio.run(create_todo_list())
+```
