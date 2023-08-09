@@ -3,6 +3,8 @@
 
 import asyncio
 
+import semantic_kernel as sk
+
 from azure.identity.aio import ClientSecretCredential
 from kiota_authentication_azure.azure_identity_authentication_provider import AzureIdentityAuthenticationProvider
 
@@ -10,6 +12,8 @@ from msgraph import GraphRequestAdapter
 from msgraph import GraphServiceClient
 
 asyncio.set_event_loop_policy(asyncio.WindowsSelectorEventLoopPolicy())
+
+kernel = sk.Kernel()
 
 # Create auth proviver object. Used to authenticate request
 
