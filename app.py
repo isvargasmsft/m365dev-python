@@ -1,5 +1,4 @@
 """M365 Developer | Python """
-# pylint: disable=no-member
 
 import asyncio
 
@@ -21,32 +20,25 @@ kernel = sk.Kernel()
 
 # Create auth proviver object. Used to authenticate request
 
-credential = EnvironmentCredential("tenantID",
-                                    "clientID",
-                                    "clientSecret")
+credential = EnvironmentCredential()
 scopes = ['https://graph.microsoft.com/.default']
-auth_provider = AzureIdentityAuthenticationProvider(credential, scopes=scopes)
-
-# Initialize a request adapter. Handles the HTTP concerns
-request_adapter = GraphRequestAdapter(auth_provider)
 
 # Get a service client
-client = GraphServiceClient(request_adapter)
+client = GraphServiceClient(credential, scopes)
 
 # GET emails from user
 async def get_user_messages():
      """Getting the messages of a user"""
      try:
-         messages = await client.users.by_user_id("AlexW@contoso.com").messages.get()
-         for msg in messages.value:
-             print(
-                 msg.subject,
-                 msg.id,
-             )
-     except Exception as e_rr:
+         messages = await client.users.by_user_id("AlexW@M365x86781558.OnMicrosoft.com").messages.get()
+        #  for msg in messages.value:
+        #      print(
+        #          msg.subject,
+        #          msg.id,
+        #      )
+     except APIError as e_rr:
          print(f'Error: {e_rr.error.message}')
 
-asyncio.run(get_user_messages())
 
 # Create ToDo list
 my_list_id = "_"
@@ -64,15 +56,19 @@ async def create_todo_list_and_tasks():
         request_body.display_name = 'Action items from emails'
         result = await client.users.by_user_id("AlexW@M365x86781558.OnMicrosoft.com").todo.lists.post(request_body)
         my_list_id = result.id
-        print(my_list_id)
+        # print(my_list_id)
 
         # Adding tasks
         for item in my_action_items:
             request_body = TodoTask()
             request_body.title = item
-            result = await client.users.by_user_id("AlexW@M365x86781558.OnMicrosoft.com").todo.lists.by_list_id(my_list_id).tasks.post(request_body)
+            result = await client.users.by_user_id("AlexW@M365x86781558.OnMicrosoft.com").todo.lists.by_todo_task_list_id(my_list_id).tasks.post(request_body)
 
-    except Exception as e_rr:
+    except APIError as e_rr:
         print(f'Error: {e_rr.error.message}')
 
-asyncio.run(create_todo_list_and_tasks())
+
+async def main():
+    await get_user_messages()
+    await create_todo_list_and_tasks()
+asyncio.run(main())

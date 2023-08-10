@@ -7,6 +7,10 @@ This application reads the emails from a user, extracts actions items and create
 2. Log into the [Azure portal](portal.azure.com) with your M365 sandbox tenant.
 3. Go to Azure Active Directory and [register your application in the portal](https://learn.microsoft.com/en-us/azure/active-directory/develop/quickstart-register-app).
 
+## Create a virtual environment
+1. Ctrl + Shift jaldjaslkdja
+2. Create environment variables
+
 ## Install the Microsoft Graph Python SDK
 ```py
 pip install msgraph-sdk
