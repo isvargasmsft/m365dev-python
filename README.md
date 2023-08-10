@@ -8,16 +8,39 @@ This application reads the emails from a user, extracts actions items and create
 3. Go to Azure Active Directory and [register your application in the portal](https://learn.microsoft.com/en-us/azure/active-directory/develop/quickstart-register-app).
 
 ## Create a virtual environment
-1. Ctrl + Shift jaldjaslkdja
-2. Create environment variables
+To get started, create a folder somewhere in your computer or a GitHub repository to host your project and open the project in Visual Studio Code.
+1. Inside your project, create an app.py file.
+2. Press `Ctrl + Shift + P` and select `Create environment` -> Venv -> {python version you are using}.
+3. Once the environment has been created, go to `/.venv/Scripts/Activate.ps1` in the VS code terminal and run this file. For example:
+` & c:/Users/isvargas/Documents/GitHub/m365dev-python/.venv/Scripts/Activate.ps1`. This will activate your environment. You'll know your environment is active if there is a green `(.env)` at the beginning of your command line in the terminal. Example:
+`(.venv) PS C:\Users\isvargas\Documents\GitHub\m365dev-python>`
+4. Inside this file, scroll down to the `Add the venv to the PATH` section and add the authentication variables. It should look like this:
+```ps1
+# Add the venv to the PATH
+Copy-Item -Path Env:PATH -Destination Env:_OLD_VIRTUAL_PATH
+$Env:PATH = "$VenvExecDir$([System.IO.Path]::PathSeparator)$Env:PATH"
+
+$Env:AZURE_CLIENT_ID="client_id_from_app_registration"
+$Env:AZURE_CLIENT_SECRET="client_secret_from_app_registration"
+$Env:AZURE_TENANT_ID="tenant_id_from_app_registration"
+
+$Env:OPENAI_API_KEY=""
+$Env:OPENAI_ORG_ID=""
+$Env:AZURE_OPENAI_DEPLOYMENT_NAME=""
+$Env:AZURE_OPENAI_ENDPOINT=""
+$Env:AZURE_OPENAI_API_KEY=""
+```
+Replace the `value_id_from_app_registration` with the actual IDs you received from the app registration.
 
 ## Install the Microsoft Graph Python SDK
+Now we can start installing the libraries we'll use. In the VS Code terminal run:
 ```py
 pip install msgraph-sdk
 ```
 > Note: Enable long paths in your environment if you receive a `Could not install packages due to an OSError`. For details, see [Enable Long Paths in Windows 10, Version 1607, and Later](https://learn.microsoft.com/en-us/windows/win32/fileio/maximum-file-path-limitation?tabs=powershell#enable-long-paths-in-windows-10-version-1607-and-later).
 
-## Install the Semantic Kernel 
+## Install the Semantic Kernel
+The Semantic Kernel is an SDK that integrates Large Language Models (LLMs) like OpenAI, Azure OpenAI, and Hugging Face with conventional programming languages like C#, Python, and Java. To install the Semantic Kernel in your project run the following command in the VS Code command line:
 ```PyPI
 pip install semantic-kernel
 ```
