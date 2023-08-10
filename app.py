@@ -1,4 +1,4 @@
-"""M365 Developer | Python """
+"""M365 Developer | Microsoft Graph Python SDK and Semantic Kernel"""
 
 import asyncio
 
